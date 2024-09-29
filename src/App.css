@@ -39,6 +39,7 @@
   }
 }
 
+/* #region header */
 header {
   padding: 32px;
 }
@@ -52,7 +53,9 @@ header {
   height: 54px;
   width: 199px;
 }
+/* #endregion header */
 
+/* #region navigation */
 .nav-list {
   display: flex;
   list-style: none;
@@ -66,7 +69,9 @@ header {
   font-size: 15pt;
   font-weight: 400;
 }
+/* #endregion navigation*/
 
+/* #region hero */
 .hero-container {
   display: grid;
   grid-template-columns: auto auto;
@@ -130,7 +135,9 @@ header {
   font-weight: 500;
   margin-top: 15px;
 }
+/* #endregion hero */
 
+/* #region specials */
 .specials-title {
   font-family: 'Markazi Text', sans-serif;
   font-size: 45pt;
@@ -208,7 +215,99 @@ article > p {
   height: 185px;
   border-radius: 16px 16px 0 0;
 }
+/* #endregion specials */
 
+/* #region BookingForm */
+ .booking-header {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+  background-color: #495E57;
+  flex-wrap: wrap;
+}
+
+.booking-title {
+  font-family: 'Markazi Text', sans-serif;
+  font-size: 48pt;
+  font-weight: 400;
+  color: #F4CE14;
+}
+
+.booking-image img {
+  width: 100%;
+  max-height: 425px;
+  border-radius: 16px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (min-width: 770px) {
+  .form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    margin-top: 10px;
+  }
+}
+
+.form-fields {
+  display: grid;
+  gap: 5px;
+  margin: 20px 0;
+}
+
+.form-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 10pt;
+  font-weight: 400;
+}
+
+.form-input {
+  width: 357px;
+  height: 50px;
+  border-radius: 10px;
+  font-family: 'Karla', sans-serif;
+  font-size: 14pt;
+  font-weight: 400;
+  background-color: #EDEFEE;
+}
+
+.form-radio {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-btn input {
+  width: 310px;
+  height: 50px;
+  border-radius: 16px;
+  border: none;
+  background-color: #F4CE14;
+  font-family: 'Karla', sans-serif;
+  font-size: 14pt;
+  font-weight: 500;
+}
+
+select, input[placeholder] {
+  font-family: 'Kara', sans-serif;
+  font-size: 12pt;
+  font-weight: 300;
+  padding: 0 15px;
+}
+/* #endregion BookingForm */
+
+/* #region footer */
 footer {
   display: flex;
   background-color: #495E57;
@@ -229,10 +328,6 @@ footer img {
   height: 279px;
   width: 162px;
   border: 1px solid black;
-}
-
-.footer-logo {
-  /* width: 25%; */
 }
 
 .footer-list {
@@ -272,3 +367,4 @@ footer img {
   /* width: 25%; */
   /* margin-left: 10px; */
 }
+/* #endregion footer */
