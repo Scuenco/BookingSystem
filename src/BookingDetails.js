@@ -20,14 +20,14 @@ const BookingDetails = () => {
   }
   return (
     <>
-    <section className="booking-header">
+    <section className="booking-header" aria-label="booking header">
       <h1 className="booking-title">Reservations</h1>
       <div className="booking-image">
         <img src={image} alt="booking" />
       </div>
     </section>
     <form onSubmit={handleSubmit}>
-      <section className="form-group">
+      <section className="form-group" aria-label="customer details">
           <div className="form-fields">
             <label className="form-label" htmlFor="firstname">First Name*</label>
             <input className="form-input" type="text" id="firstname" placeholder="Enter first name"
@@ -49,7 +49,7 @@ const BookingDetails = () => {
               value={phone} onChange={e => setPhone(e.target.value)}/>
           </div>
       </section>
-      <section className="form-btn">
+      <section className="form-btn" aria-label="submit reservation">
          <input type="submit" value="Reserve a Table" />
       </section>
     </form>

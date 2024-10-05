@@ -2,6 +2,8 @@ import './App.css';
 import Homepage from './Homepage';
 import About from './About';
 import BookingPage from './BookingPage';
+import BookingForm from './BookingForm';
+import Main from './Main';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {

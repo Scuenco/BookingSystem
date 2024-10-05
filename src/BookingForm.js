@@ -1,54 +1,48 @@
 import React, {useState} from "react";
 import image from "./assets/restaurant.jpg";
 
-const BookingForm = () => {
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedTime, setSelectedTime] = useState();
-  const [availableTimes, setAvailableTimes] = useState([
-    { value: "11:00 am" },
-    { value: "12:00 nn" },
-    { value: "1:00 pm" },
-    { value: "2:00 pm" },
-    { value: "3:00 pm" },
-    { value: "4:00 pm" },
-    { value: "5:00 pm" },
-    { value: "6:00 pm" },
-    { value: "7:00 pm" },
-    { value: "8:00 pm" }
-  ])
-  const [guests, setGuests] = useState();
-  const [occassion, setOccassion] = useState();
-  const [tableOption, setTableOption] = useState();
+const BookingForm = (props) => {
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [guests, setGuests] = useState(0);
+  const [occassion, setOccassion] = useState('');
+  const [tableOption, setTableOption] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('select date: ', selectedDate);
-    console.log('select time: ', selectedTime);
-    console.log('select guests: ', guests);
-    console.log('select occassion: ', occassion);
-    console.log('select table option:', tableOption);
+    setSelectedDate('');
+    setSelectedTime('');
+    setGuests('');
+    setOccassion('');
+    setTableOption('');
+  };
+
+  function handleSelectedDate(e) {
+      setSelectedDate(e.target.value);
+      props.dispatch({type: e.target.value});
   }
 
   return (
     <>
-    <section className="booking-header">
+    <section className="booking-header" aria-label="booking header">
       <h1 className="booking-title">Reservations</h1>
       <div className="booking-image">
         <img src={image} alt="booking" />
       </div>
     </section>
     <form onSubmit={handleSubmit}>
-      <section className="form-group">
+      <section className="form-group" aria-label="booking specifications">
           <div className="form-fields">
             <label className="form-label" htmlFor="res-date">Date</label>
-            <input className="form-input" type="date" id="res-date" placeholder="Select date"
-              value={selectedDate} onChange={e => setSelectedDate(e.target.value)}/>
+            <input className="form-input" type="date" id="res-date" placeholder="Select date" data-testid='date-input'
+              value={selectedDate} onChange={e => handleSelectedDate(e)} />
           </div>
           <div className="form-fields">
             <label className="form-label" htmlFor="res-time">Time</label>
-            <select className="form-input" id="res-time "
-              value={selectedTime} onChange={e => setSelectedTime(e.target.value)}>
-              {availableTimes.map((time, key) => <option key={key} value={time.value}>{time.value}</option>)}
+            <select data-testid='select-option' name='select-time' className="form-input" id="res-time"
+              value={selectedTime} onChange={e => setSelectedTime(e.target.value)} >
+              {props.availableTimes.map((time, key) =>
+                <option key={key} value={time.value}>{time.value}</option>)}
             </select>
           </div>
           <div className="form-fields">
@@ -68,7 +62,7 @@ const BookingForm = () => {
           </div>
       </section>
       <span>Select table option</span>
-      <section className="form-radio">
+      <section className="form-radio" aria-label="table options">
         <div>
           <input type="radio" id="table" name="option" value="Table"
             onChange={e => setTableOption(e.target.value)}/>
@@ -80,7 +74,7 @@ const BookingForm = () => {
           <label htmlFor="booth"for>Booth</label>
         </div>
       </section>
-      <section className="form-btn">
+      <section className="form-btn" aria-label="submit button">
          <input type="submit" value="Continue" />
       </section>
     </form>
