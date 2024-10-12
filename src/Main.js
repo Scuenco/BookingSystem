@@ -1,46 +1,67 @@
-import React, {useState, useReducer} from "react";
-import Hero from './Hero';
-import Specials from './Specials';
-import BookingForm from "./BookingForm";
+import React, {useState, useReducer, useEffect} from "react";
+import Homepage from './Homepage';
+import BookingPage from "./BookingPage";
+import {fetchAPI, submitAPI} from './mockApi';
+import ConfirmedBooking from "./ConfirmedBooking";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import BookingDetails from "./BookingDetails";
 
 const Main = () => {
+  const [initializeTimes, setInitializeTimes] = useState(fetchAPI(new Date()));
+  const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes);
+  const navigate = useNavigate();
+
   // reducer function
   function updateTimes( availableTimes, action ) {
-    switch (action.type) {
-      case '2024-10-03': {
-        console.log('action.type: ', action.type);
-        return [...availableTimes];
-      }
-      case '2024-10-04': {
-        return [...availableTimes];
-      }
-      case '2024-10-05': {
-        return [...availableTimes];
-      }
-      default: {
-        return [...availableTimes];
-      }
-    }
+    const persistentData = JSON.parse(localStorage.getItem(action.type));
+    return (persistentData ? persistentData : fetchAPI(new Date(action.type)));
   };
 
-  //create the initial state for the availableTimes.
-  const initializeTimes = [
-    { value: "11:00 am" },
-    { value: "12:00 nn" },
-    { value: "6:00 pm" },
-    { value: "7:00 pm" },
-    { value: "8:00 pm" }
-  ]
+  function submitForm(formData) {
+    if (submitAPI(formData)) {
+      let dateAPI = JSON.parse(localStorage.getItem(formData.selectedDate));
+      if (dateAPI === null) {
+        let updateAvailableTimes = availableTimes.filter(time => time !==  formData.selectedTime );
+        localStorage.setItem(formData.selectedDate, JSON.stringify(updateAvailableTimes));
+      }
+      else {
+        let updateAPI = dateAPI.filter(time => time !==  formData.selectedTime );
+        localStorage.setItem(formData.selectedDate, JSON.stringify(updateAPI));
+      }
+      console.log(localStorage);
+      const fullname = `${formData.fname} ${formData.lname}`;
+      navigate('/reservations/confirm-booking', {state: {fullname}});
+    }
+    return;
+  }
 
-  // change availableTimes from useState to a reducer
-  const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes);
+  useEffect((formData) => {
+    if (formData) {
+      submitForm(formData);
+    }
+    const cleanup = (event) => {
+      localStorage.clear();
+      event.preventDefault(); // Prevents immediate closing
+      event.returnValue = ''; // Required to show prompt in some browsers
+      return ''; // Required to show prompt in some browsers
+    };
+    window.addEventListener('beforeunload', cleanup);
+    return () => {
+      window.removeEventListener('beforeunload', cleanup);
+    }
+  }, []);
 
   return (
     <>
-      {/* <Hero />
-      <Specials /> */}
-      <BookingForm availableTimes={availableTimes} dispatch={dispatch}/>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/reservations" element={
+        <BookingPage availableTimes={availableTimes} dispatch={dispatch} submitForm={submitForm}/>}/>
+      <Route path="/reservations/details" element={<BookingDetails submitForm={submitForm}/>} />
+      <Route path="/reservations/confirm-booking" element={<ConfirmedBooking />} />
+    </Routes>
     </>
   )
 }
+
 export default Main;

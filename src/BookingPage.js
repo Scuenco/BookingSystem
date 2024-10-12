@@ -1,17 +1,11 @@
 import React from "react";
-import Header from "./Header";
 import BookingForm from "./BookingForm";
-import Main from "./Main";
-import Footer from "./Footer";
-import BookingDetails from "./BookingDetails";
 
-const BookingPage = () => {
+const BookingPage = (props) => {
   return (
     <>
-      <Header />
-      <Main />
-      {/* <BookingDetails /> */}
-      <Footer />
+      <BookingForm availableTimes={props.availableTimes} dispatch={props.dispatch}
+        submitForm={props.submitForm}/>
     </>
   )
 }

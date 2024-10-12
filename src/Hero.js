@@ -1,7 +1,13 @@
 import React from "react";
 import  hero from './assets/hero.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate('/reservations')
+  }
   return (
     <>
     <div className="hero-container">
@@ -11,7 +17,7 @@ const Hero = () => {
         <p className="hero-lead-text">We are a family owned Mediterranean restaurant,
           focused on traditional recipes served with a modern twist.
         </p>
-        <button className="hero-btn">Reserve a Table</button>
+        <button className="hero-btn" onClick={handleClick}>Reserve a Table</button>
       </div>
       <div className="hero-image">
         <img src={hero} alt="hero"/>

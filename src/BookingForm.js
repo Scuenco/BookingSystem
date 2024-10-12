@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import image from "./assets/restaurant.jpg";
 
 const BookingForm = (props) => {
@@ -8,11 +9,15 @@ const BookingForm = (props) => {
   const [occassion, setOccassion] = useState('');
   const [tableOption, setTableOption] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    navigate('/reservations/details',
+      { state: {selectedDate, selectedTime, guests, occassion, tableOption} });
     setSelectedDate('');
     setSelectedTime('');
-    setGuests('');
+    setGuests(0);
     setOccassion('');
     setTableOption('');
   };
@@ -34,15 +39,14 @@ const BookingForm = (props) => {
       <section className="form-group" aria-label="booking specifications">
           <div className="form-fields">
             <label className="form-label" htmlFor="res-date">Date</label>
-            <input className="form-input" type="date" id="res-date" placeholder="Select date" data-testid='date-input'
-              value={selectedDate} onChange={e => handleSelectedDate(e)} />
+            <input className="form-input" type="date" id="res-date" placeholder="Select date"
+              value={selectedDate} onChange={e => handleSelectedDate(e)} data-testid='select-date'/>
           </div>
           <div className="form-fields">
             <label className="form-label" htmlFor="res-time">Time</label>
-            <select data-testid='select-option' name='select-time' className="form-input" id="res-time"
-              value={selectedTime} onChange={e => setSelectedTime(e.target.value)} >
-              {props.availableTimes.map((time, key) =>
-                <option key={key} value={time.value}>{time.value}</option>)}
+            <select data-testid='select-option' className="form-input" id="res-time"
+              value={selectedTime} onChange={e => setSelectedTime(e.target.value)}><option>Select time</option>
+              {props.availableTimes.map((time, key) =><option key={key} value={time}>{time}</option>)}
             </select>
           </div>
           <div className="form-fields">
@@ -54,6 +58,7 @@ const BookingForm = (props) => {
             <label className="form-label" htmlFor="occasion">Occasion</label>
             <select className="form-input" id="occasion" placeholder="Occasion"
               value={occassion} onChange={e => setOccassion(e.target.value)}>
+                <option></option>
                 <option>Birthday</option>
                 <option>Anniversary</option>
                 <option>Graduation</option>
@@ -66,16 +71,16 @@ const BookingForm = (props) => {
         <div>
           <input type="radio" id="table" name="option" value="Table"
             onChange={e => setTableOption(e.target.value)}/>
-          <label htmlFor="table"for>Table</label>
+          <label htmlFor="table">Table</label>
         </div>
         <div>
           <input type="radio" id="booth" name="option" value="Booth"
             onChange={e => setTableOption(e.target.value)}/>
-          <label htmlFor="booth"for>Booth</label>
+          <label htmlFor="booth">Booth</label>
         </div>
       </section>
       <section className="form-btn" aria-label="submit button">
-         <input type="submit" value="Continue" />
+         <input disabled={!selectedDate || !selectedTime || !guests} type="submit" value="Continue" />
       </section>
     </form>
     </>

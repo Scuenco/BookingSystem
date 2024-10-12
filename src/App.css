@@ -307,6 +307,50 @@ select, input[placeholder] {
 }
 /* #endregion BookingForm */
 
+/* #region BookingDetails */
+.bookingDetails-header {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+  background-color: #495E57;
+  flex-wrap: wrap;
+}
+
+.booking-lead-text span {
+  font-family: 'Karla', sans-serif;
+  line-height: 1.5;
+  font-size: 14pt;
+  font-weight: 300;
+  font-style: normal;
+  color: #FFFFFF;
+  margin-top: -20px;
+  width: 310px;
+}
+/* #endregion BookingDetails */
+
+/* #region ConfirmedBooking */
+.confirm-modal-overlay {
+  display: grid;
+  place-items: center;
+  padding: 0 20px;
+}
+.confirm-modal-content div{
+  display: grid;
+  place-items: center;
+}
+.confirm-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 16px;
+  border: none;
+  background-color: #F4CE14;
+  font-family: 'Karla', sans-serif;
+  font-size: 14pt;
+  font-weight: 500;
+  margin-top: 15px;
+}
+/* #endregion ConfirmedBooking */
+
 /* #region footer */
 footer {
   display: flex;

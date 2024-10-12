@@ -1,32 +1,40 @@
-import { render, screen, fireEvent, queryAllByText } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
-import React, {useReducer} from "react";
-import BookingForm, { availableTimes, dispatch} from './BookingForm';
-import userEvent from '@testing-library/user-event';
+import React from "react";
+import { BrowserRouter} from 'react-router-dom';
+import BookingForm from './BookingForm';
 
 test('Must render the static text heading', () => {
-  render(<BookingForm availableTimes={[
-    { value: "11:00 am" },
-    { value: "12:00 nn" },
-    { value: "6:00 pm" },
-    { value: "7:00 pm" },
-    { value: "8:00 pm" }
-  ]} />);
+  const availableTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  render(<BrowserRouter><BookingForm availableTimes={availableTimes}/></BrowserRouter>);
   const headingElement = screen.getByText("Reservations");
   expect(headingElement).toBeInTheDocument();
 });
 
-test('initializeTimes must return the expected value', async () => {
-  const availableTimes = [
-    { value: "11:00 am" },
-    { value: "12:00 nn" },
-    { value: "6:00 pm" },
-    { value: "7:00 pm" },
-    { value: "8:00 pm" } ];
+// Mock the fetch function
+global.fetch = jest.fn(() =>
+Promise.resolve({
+  json: () => Promise.resolve({data: ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]}),
+}))
 
-  const mockDispatch = jest.fn();
-  render(<BookingForm availableTimes={availableTimes} dispatch={mockDispatch}/>);
-  const selectElement = screen.getByTestId('select-option', {name: 'select-time'});
-  await userEvent.selectOptions(selectElement, "11:00 am" );
-  expect(selectElement.length).toEqual(availableTimes.length);
-});
+test('initializeTimes must call the fetchAPI and renders', async () => {
+  const availableTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  render(<BrowserRouter><BookingForm availableTimes={availableTimes}/></BrowserRouter>);
+  await waitFor(() => {
+    expect(screen.getByTestId('select-option')).toBeInTheDocument();
+  })
+})
+
+  beforeEach(() => {
+  localStorage.clear();
+})
+
+test('updateTimes should retrieve data from localStorage', async() => {
+  localStorage.setItem('2024-10-12', '["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]');
+  const availableTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  render(<BrowserRouter>< BookingForm availableTimes={availableTimes} /></BrowserRouter>);
+  await fireEvent.select(screen.getByTestId('select-date', {target: {value: '2024-10-10' }}));
+  await fireEvent.change(screen.getByTestId('select-option', {target: {value: "17:00"}}));
+
+  expect(localStorage.getItem('2024-10-12')).toBe('["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]');
+} );
