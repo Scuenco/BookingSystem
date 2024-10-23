@@ -1,12 +1,7 @@
 import './App.css';
-import Homepage from './Homepage';
-import About from './About';
-import BookingPage from './BookingPage';
-import BookingForm from './BookingForm';
-import Header from './Header';
-import Main from './Main';
-import { Routes, Route } from 'react-router-dom';
-import Footer from './Footer';
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
 
 function App() {
   return (
