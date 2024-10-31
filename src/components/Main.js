@@ -1,9 +1,8 @@
 import React, {useState, useReducer, useEffect} from "react";
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import {fetchAPI, submitAPI} from '../api/mockApi';
 import Homepage from './Homepage';
 import BookingPage from "./BookingPage";
-import ConfirmedBooking from "./ConfirmedBooking";
 import BookingForm2 from "./BookingForm2";
 import About from "./About";
 import Menu from "./Menu";
@@ -13,7 +12,7 @@ import Login from "./Login";
 const Main = () => {
   const [initializeTimes, setInitializeTimes] = useState(fetchAPI(new Date()));
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes);
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // reducer function
   function updateTimes( availableTimes, action ) {
@@ -33,8 +32,7 @@ const Main = () => {
         localStorage.setItem(formData.date, JSON.stringify(updateAPI));
       }
       console.log('localStorage: ', localStorage); //
-      const fullname = `${formData.fname} ${formData.lname}`;
-      navigate('/reservations/confirm-booking', {state: {fullname}});
+      setIsModalOpen(true);
     }
     return;
   }
@@ -55,6 +53,10 @@ const Main = () => {
     }
   }, []);
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
+
   return (
     <>
     <Routes>
@@ -63,8 +65,8 @@ const Main = () => {
       <Route path="/menu" element={<Menu/>} />
       <Route path="/reservations" element={
         <BookingPage availableTimes={availableTimes} dispatch={dispatch} submitForm={submitForm}/>}/>
-      <Route path="/reservations/details" element={<BookingForm2 submitForm={submitForm}/>} />
-      <Route path="/reservations/confirm-booking" element={<ConfirmedBooking />} />
+      <Route path="/reservations/details" element={<BookingForm2 submitForm={submitForm}
+        isModalOpen={isModalOpen} onClose={closeModal} />} />
       <Route path="/order" element={<Order/>} />
       <Route path="/login" element={<Login/>} />
     </Routes>

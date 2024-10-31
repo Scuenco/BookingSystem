@@ -39,9 +39,25 @@
   }
 }
 
-input:focus:invalid {
-  border: 2px solid red;
+/* #region about */
+.about-img {
+  display: grid;
+  padding-top: 25px;
 }
+.about-img img {
+  height: 325px;
+  width: 275px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+.about-img-a {
+  margin-left: 190px;
+}
+.about-img-b {
+  margin-top: -235px;
+  z-index: 1;
+}
+/* #endregion about */
 
 /* #region header */
 header {
@@ -152,13 +168,16 @@ nav ul li a:not(.active):hover {
   justify-content: center;
   background-color: #495E57;
   height: 406px;
-  column-gap: 10%;
+  column-gap: 10vw;
 }
 
 @media (max-width: 500px) {
   .hero-container {
     grid-template-columns:  auto;
     height: auto;
+  }
+  .hero-content {
+    margin-left: 5vw;
   }
 }
 
@@ -415,14 +434,26 @@ select, input[placeholder] {
 /* #endregion BookingDetails */
 
 /* #region ConfirmedBooking */
-.confirm-modal-overlay {
+.confirm-modal-overlay.open{
   display: grid;
   place-items: center;
   padding: 0 20px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
 }
-.confirm-modal-content div{
-  display: grid;
+.confirm-modal-overlay {
+  display: none;
+}
+.confirm-modal-content {
   place-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
 }
 .confirm-button {
   width: 200px;

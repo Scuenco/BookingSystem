@@ -1,5 +1,6 @@
 import React from "react";
 import imageA from '../assets/Mario and Adrian A.jpg';
+import imageB from '../assets/Mario and Adrian b.jpg';
 
 const About = () => {
   return (
@@ -13,8 +14,13 @@ const About = () => {
           features a locally-sourced menu with daily specials.
         </p>
       </div>
-      <div className="hero-image">
-        <img src={imageA} alt="Mario and Adrian"/>
+      <div className="about-img">
+        <div className="about-img-a">
+          <img src={imageA} alt="Mario and Adrian"/>
+        </div>
+        <div className="about-img-b">
+          <img src={imageB} alt="Mario and Adrian"/>
+        </div>
       </div>
     </section>
     </>

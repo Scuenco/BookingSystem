@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import image from "../assets/restaurant chef B.jpg";
+import ConfirmedBooking from "./ConfirmedBooking";
 
 const BookingDetails = (props) => {
   const location = useLocation();
@@ -95,7 +96,7 @@ const BookingDetails = (props) => {
           <span>Time:  {prevPage.time}</span><br/>
           <span>Guests:  {prevPage.guests}</span><br/>
           <span>Occassion:  {prevPage.occassion}</span><br/>
-          <span>Table option:  {prevPage.option}</span>  
+          <span>Table option:  {prevPage.option}</span>
         </div>
       </div>
       <div className="booking-image">
@@ -137,6 +138,7 @@ const BookingDetails = (props) => {
          <input type="submit" name="submit" value="Reserve a Table" data-testid="reserve"/>
       </section>
     </form>
+    <ConfirmedBooking isOpen={props.isModalOpen} onClose={props.onClose} name={`${formData.fname} ${formData.lname}`}/>
     </>
   )
 }
