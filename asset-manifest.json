@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/BookingSystem/static/css/main.6068933c.css",
+    "main.js": "/BookingSystem/static/js/main.fe28b66d.js",
+    "static/js/453.15cc4906.chunk.js": "/BookingSystem/static/js/453.15cc4906.chunk.js",
+    "static/media/Mario and Adrian A.jpg": "/BookingSystem/static/media/Mario and Adrian A.7f44c6d6e341a27d14b3.jpg",
+    "static/media/Mario and Adrian b.jpg": "/BookingSystem/static/media/Mario and Adrian b.6ba0e06bfa9c1ea75109.jpg",
+    "static/media/bruchetta.svg": "/BookingSystem/static/media/bruchetta.ec4950d4eabf4293f4120e3b6c48b7cf.svg",
+    "static/media/restaurant chef B.jpg": "/BookingSystem/static/media/restaurant chef B.4b4c2d26b514db32e8fc.jpg",
+    "static/media/greek salad.jpg": "/BookingSystem/static/media/greek salad.bed423a1fab5b210e347.jpg",
+    "static/media/hero.jpg": "/BookingSystem/static/media/hero.8c18e3cf861cd4fa9d0a.jpg",
+    "static/media/restaurant.jpg": "/BookingSystem/static/media/restaurant.324d0f99bdf19400a0f7.jpg",
+    "static/media/Logo.svg": "/BookingSystem/static/media/Logo.2c379c7ea7eb07402bfc7700915316de.svg",
+    "static/media/logo2.png": "/BookingSystem/static/media/logo2.1ce1c46cf11500c712e9.png",
+    "index.html": "/BookingSystem/index.html",
+    "static/media/hamburger.svg": "/BookingSystem/static/media/hamburger.2cba90d9a2294d6ec4901bf28d25c693.svg",
+    "static/media/Recent.svg": "/BookingSystem/static/media/Recent.522b624ca2b8c3176426ac87fd6dc1de.svg",
+    "main.6068933c.css.map": "/BookingSystem/static/css/main.6068933c.css.map",
+    "main.fe28b66d.js.map": "/BookingSystem/static/js/main.fe28b66d.js.map",
+    "453.15cc4906.chunk.js.map": "/BookingSystem/static/js/453.15cc4906.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6068933c.css",
+    "static/js/main.fe28b66d.js"
+  ]
+}
